@@ -14,6 +14,14 @@ FFMPEG Cheat Sheet with the most needed stuff..
 ffmpeg -i input.mp4 -vf "scale=720:trunc(ow/a/2)*2" -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k output.mp4
 ```
 
+### Change width to 314:328
+```
+ffmpeg -i input.mp4 -vf "scale=314:328" -c:a copy output.mp4
+```
+
+
+
+
 
 
 
