@@ -2,18 +2,34 @@
 FFMPEG Cheat Sheet with the most needed stuff..
 
 
+# transform
 
 <br><br>
 
-# Rotate
+## Rotate
 ```shell
 # Here, replace <x> with 0 to disable any existing rotation, or any value like 90, 180 or 270 to rotate the displayed video. Note that some players may ignore these flags.
 ffmpeg -i input.mp4 -c copy -metadata:s:v:0 rotate=<x> output.mp4
 ```
 
 
+
+
+
+
+
+
+
+
+
+
 <br><br>
 <br><br>
+
+# images
+
+<br><br>
+
 
 
 # Split video into pictures
@@ -23,11 +39,33 @@ ffmpeg -i file.mpg -r 1/1 $filename%03d.bmp
 
 
 
+
+
+
+
+
+
+
+<br><br>
+<br><br>
+
+# Convert
+
+## mp4 to webm
+```
+ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 1M -c:a libopus output.webm
+```
+
+
+
+
+
+
 <br><br>
 <br><br>
 
 
-# Optimize for web
+# Optimize
 
 ## Option #1 (High compress)
 ```shell
