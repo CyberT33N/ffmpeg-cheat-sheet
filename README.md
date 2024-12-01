@@ -28,6 +28,8 @@ ffmpeg -i file.mpg -r 1/1 $filename%03d.bmp
 
 
 # Optimize for web
+
+## Option #1 (High compress)
 ```shell
 ffmpeg -i input.mp4 -vcodec libx264 -preset slow -profile:v high -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
 ```
@@ -69,4 +71,50 @@ Erklärung des Befehls:
   Ersetze `libx264` durch `libaom-av1`.
 
 Dieser Befehl liefert dir ein weboptimiertes Video mit ausgezeichneter Balance aus Qualität und Ladezeit.
+
+
+
+
+
+
+
+
+<br><br>
+<br><br>
+
+
+## Option #2 (Max compress)
+Für die kleinste Dateigröße bei akzeptabler Qualität kannst du die **CRF-Methode (Constant Rate Factor)** verwenden. Sie passt die Bitrate automatisch an, um die Qualität zu erhalten, ohne die Datei unnötig groß zu machen.  
+
+Hier der optimierte FFmpeg-Befehl:  
+
+```bash
+ffmpeg -i input.mp4 -vcodec libx264 -preset veryslow -crf 28 -profile:v high -level 4.1 -vf "scale=-2:720" -acodec aac -b:a 96k -movflags +faststart output.mp4
 ```
+
+### Änderungen gegenüber dem vorherigen Befehl:
+1. **CRF (Qualitätsfaktor): `-crf 28`**  
+   - Der CRF-Wert steuert die Kompression.  
+   - **Empfohlene Werte:**  
+     - 18–23: Hohe Qualität, größere Dateien.  
+     - 24–28: Gute Qualität, kleinere Dateien.  
+     - Ab 30: Sichtbarer Qualitätsverlust.  
+
+2. **Preset: `-preset veryslow`**  
+   - Verwendet mehr Zeit für die Kodierung, um die beste Kompression zu erreichen.  
+   - Kann auf `slow` reduziert werden, wenn die Kodierung zu lange dauert.
+
+3. **Audio-Bitrate: `-b:a 96k`**  
+   - Niedrigere Bitrate für Audio, spart Platz (reicht für Sprache und einfache Musik).
+
+4. **Skalierung: `scale=-2:720`**  
+   - Auflösung bleibt bei 720p für Weboptimierung.
+
+### Beispiel:
+Ein 100 MB großes 1080p-Video könnte mit diesem Befehl auf ~10–20 MB reduziert werden, je nach Inhalt und Bewegung.  
+
+**Falls noch kleinere Dateien gewünscht sind:**
+- Erhöhe den CRF-Wert auf 30.
+- Reduziere die Audio-Bitrate auf `-b:a 64k`.  
+
+Teste die Qualität nach der Komprimierung, um sicherzugehen, dass sie für deinen Zweck noch ausreichend ist.
