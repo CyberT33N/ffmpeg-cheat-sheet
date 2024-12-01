@@ -20,3 +20,14 @@ ffmpeg -i input.mp4 -c copy -metadata:s:v:0 rotate=<x> output.mp4
 ```shell
 ffmpeg -i file.mpg -r 1/1 $filename%03d.bmp
 ```
+
+
+
+<br><br>
+<br><br>
+
+
+# Optimize for web
+```shell
+ffmpeg -i 0_Woman_Red_3840x2160.mov -vcodec libx264 -preset slow -profile:v high -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
+```
