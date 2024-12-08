@@ -94,11 +94,15 @@ ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 1M -c:a libopus output.webm
 ffmpeg -i input.mp4 -vcodec libx264 -preset slow -profile:v high -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
 ```
 
-Alternative for mov files with different color scheme `x264 [error]: high profile doesn't support 4:2:2 [libx264 @ 0x628fcd3cb340] Error setting profile high.`
+If you get error: `x264 [error]: high profile doesn't support 4:2:2`
 ```shell
 ffmpeg -i 0_Effect_Fluorescent_3840x2160.mov -vcodec libx264 -preset slow -profile:v high422 -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
 ```
 
+If you get error: `264 [error]: high profile doesn't support 4:4:4`
+```shell
+ffmpeg -i 5496506_Coll_wavebreak_Animation_1920x1080.mov -vcodec libx264 -preset slow -profile:v high444 -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
+```
 
 
 
