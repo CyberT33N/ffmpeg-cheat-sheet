@@ -89,7 +89,7 @@ ffmpeg -i input.mp4 -c:v libvpx-vp9 -b:v 1M -c:a libopus output.webm
 
 # Optimize
 
-## Option #1 (High compress)
+## Option #1 (High compress) and Resize to 1280x720
 ```shell
 ffmpeg -i input.mp4 -vcodec libx264 -preset slow -profile:v high -level 4.1 -b:v 2500k -maxrate 2500k -bufsize 5000k -vf "scale=-2:720" -acodec aac -b:a 128k -movflags +faststart output.mp4
 ```
@@ -153,7 +153,7 @@ Dieser Befehl liefert dir ein weboptimiertes Video mit ausgezeichneter Balance a
 <br><br>
 
 
-## Option #2 (Max compress)
+## Option #2 (Max compress) and Resize to 1280x720
 Für die kleinste Dateigröße bei akzeptabler Qualität kannst du die **CRF-Methode (Constant Rate Factor)** verwenden. Sie passt die Bitrate automatisch an, um die Qualität zu erhalten, ohne die Datei unnötig groß zu machen.  
 
 Hier der optimierte FFmpeg-Befehl:  
